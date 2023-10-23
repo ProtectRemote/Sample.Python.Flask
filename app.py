@@ -1,3 +1,5 @@
+from socket import socket
+
 from flask import Flask
 from protectremote import pr_access, set_token, set_debug
 
@@ -16,3 +18,10 @@ def public():
 @pr_access()
 def secured():
     return 'secured'
+
+
+@app.route('/getip')
+def getip():
+    hostname = socket.gethostname()
+    IPAddr = socket.gethostbyname(hostname)
+    return IPAddr
